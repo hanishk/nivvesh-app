@@ -1,0 +1,41 @@
+name: nivvesh
+description: "A new Flutter project."
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.4
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+
+  cupertino_icons: ^1.0.8
+  flutter_svg: ^2.0.16
+  carousel_slider: ^5.0.0
+  smooth_page_indicator: ^1.2.0+3
+  google_fonts: ^6.2.1
+  shimmer_animation: ^2.2.1
+  get_it: ^8.0.3
+  dio: ^5.7.0
+  dartz: ^0.10.1
+  flutter_bloc: ^8.1.6
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+
+  flutter_lints: ^4.0.0
+
+
+flutter:
+
+  uses-material-design: true
+  assets:
+    - assets/images/navbar/
+    - assets/images/banks/
