@@ -44,7 +44,7 @@ class PopularBanks extends StatelessWidget {
   Widget _buildBankCard(BankData bank) {
     return Container(
       width: 150,
-      height: 193,
+      height: 200,
       decoration: BoxDecoration(
         color: Colors.black.withOpacity(0.7),
         borderRadius: BorderRadius.circular(12),

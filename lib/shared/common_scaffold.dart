@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nivvesh/constants/colors.dart';
 
 class CommonScaffold extends StatelessWidget {
   final String? title;
@@ -10,9 +11,10 @@ class CommonScaffold extends StatelessWidget {
   final Color? titleColor;
   final Color? appBarBackgroundColor;
   final double? elevation;
+  final bool? showIsLeadingIcon;
 
   const CommonScaffold({
-    Key? key,
+    super.key,
     required this.body,
     this.title,
     this.actions,
@@ -22,7 +24,8 @@ class CommonScaffold extends StatelessWidget {
     this.titleColor = Colors.white,
     this.appBarBackgroundColor,
     this.elevation = 0.0,
-  }) : super(key: key);
+    this.showIsLeadingIcon,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +44,19 @@ class CommonScaffold extends StatelessWidget {
         centerTitle: centerTitle,
         actions: actions,
         bottom: appBarBottom,
+        leading: showIsLeadingIcon == false
+            ? Container()
+            : IconButton(
+                splashRadius: 20,
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: Icon(
+                  Icons.arrow_back_ios,
+                  color: AppColors.whiteColour,
+                  size: 18,
+                ),
+              ),
       ),
       body: Container(
         decoration: const BoxDecoration(

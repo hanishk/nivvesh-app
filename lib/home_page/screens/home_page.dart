@@ -36,6 +36,7 @@ import 'package:flutter/material.dart';
 import 'package:nivvesh/home_page/widgets/best_plan.dart';
 import 'package:nivvesh/home_page/widgets/fixed_deposit_cards.dart';
 import 'package:nivvesh/home_page/widgets/gold_price_details.dart';
+import 'package:nivvesh/home_page/widgets/investment_card.dart';
 import 'package:nivvesh/home_page/widgets/popular_banks.dart';
 import 'package:nivvesh/shared/common_scaffold.dart';
 
@@ -50,16 +51,44 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return CommonScaffold(
+      title: 'Welcome Hanish',
+      titleColor: Color(0xFFDCB56D),
+      showIsLeadingIcon: false,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const SizedBox(height: 16),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: FixedDepositCard(),
+                padding: const EdgeInsets.only(left: 24.0),
+                child: SizedBox(
+                  height: 145,
+                  child: ListView(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    children: const [
+                      InvestmentCard(
+                        amount: '₹12,50,000',
+                        title: 'Total Investments',
+                        subtitle: '+8.5% from last month',
+                      ),
+                      InvestmentCard(
+                        amount: '₹8,00,000',
+                        title: 'Fixed Deposits',
+                        subtitle: '+6.8% avg. interest rate',
+                      ),
+                      InvestmentCard(
+                        amount: '₹4,50,000',
+                        title: 'Gold Investments',
+                        subtitle: '+12% annual returns',
+                      ),
+                    ],
+                  ),
+                ),
               ),
+              const SizedBox(height: 16),
+              const FixedDepositCard(),
               const SizedBox(height: 16),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),

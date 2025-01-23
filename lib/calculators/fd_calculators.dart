@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:nivvesh/calculators/widgets/fd_calc_result_card.dart';
 import 'package:nivvesh/constants/themes.dart';
+import 'package:nivvesh/shared/common_scaffold.dart';
 
 class FDCalculatorScreen extends StatefulWidget {
   const FDCalculatorScreen({super.key});
@@ -58,13 +59,14 @@ class _FDCalculatorScreenState extends State<FDCalculatorScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        title: Text("FD Calculator",
-            style: TextStyle(color: Colors.yellow.shade700)),
-      ),
+    return CommonScaffold(
+      showIsLeadingIcon: false,
+      // appBar: AppBar(
+      //   backgroundColor: Colors.transparent,
+      //   elevation: 0,
+      //   title: Text("FD Calculator",
+      //       style: TextStyle(color: Colors.yellow.shade700)),
+      // ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -72,6 +74,7 @@ class _FDCalculatorScreenState extends State<FDCalculatorScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Slider for Principal Amount
+              const SizedBox(height: 20),
               const Text(
                 'Principal Amount (₹)',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
