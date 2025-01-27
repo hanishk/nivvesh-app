@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:nivvesh/home_page/screens/bottom_nav.dart';
 import 'package:nivvesh/shared/common_button.dart';
 import 'package:nivvesh/shared/common_scaffold.dart';
 
@@ -13,6 +14,7 @@ class OtpVerification extends StatefulWidget {
 }
 
 class _OtpVerificationState extends State<OtpVerification> {
+  bool isLoading = false;
   final List<TextEditingController> _controllers = List.generate(
     6,
     (index) => TextEditingController(),
@@ -50,7 +52,7 @@ class _OtpVerificationState extends State<OtpVerification> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 110),
-            Text(
+            const Text(
               'Verify Your Account',
               style: TextStyle(
                 fontFamily: 'Roboto Mono',
@@ -63,7 +65,7 @@ class _OtpVerificationState extends State<OtpVerification> {
             const SizedBox(height: 4),
             Text(
               'We\'ve sent a 6-digit OTP to your registered mobile number (${widget.phoneNumber}). Please enter it below to proceed.',
-              style: TextStyle(
+              style: const TextStyle(
                 fontFamily: 'Roboto Flex',
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
@@ -80,14 +82,14 @@ class _OtpVerificationState extends State<OtpVerification> {
                   width: 37,
                   height: 38,
                   decoration: BoxDecoration(
-                    border: Border.all(color: Color(0xFFDCB56D)),
+                    border: Border.all(color: const Color(0xFFDCB56D)),
                     borderRadius: BorderRadius.circular(4),
                   ),
                   child: TextField(
                     controller: _controllers[index],
                     focusNode: _focusNodes[index],
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Color(0xFFDCB56D),
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
@@ -97,7 +99,7 @@ class _OtpVerificationState extends State<OtpVerification> {
                       FilteringTextInputFormatter.digitsOnly,
                       LengthLimitingTextInputFormatter(1),
                     ],
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       border: InputBorder.none,
                       contentPadding: EdgeInsets.zero,
                     ),
@@ -116,7 +118,7 @@ class _OtpVerificationState extends State<OtpVerification> {
             GestureDetector(
               // onTap: widget.onResendOtp,
               child: RichText(
-                text: TextSpan(
+                text: const TextSpan(
                   text: 'Didn\'t receive the code? ',
                   style: TextStyle(
                     fontFamily: 'Roboto Flex',
@@ -136,7 +138,23 @@ class _OtpVerificationState extends State<OtpVerification> {
               ),
             ),
             const Spacer(),
-            CommonButton(onTap: () {}, text: 'Verify OTP'),
+            isLoading
+                ? const LoaderContainer()
+                : CommonButton(
+                    onTap: () async {
+                      setState(() {
+                        isLoading = true;
+                      });
+                      await Future.delayed(
+                        const Duration(milliseconds: 500),
+                      );
+                      setState(() {
+                        isLoading = false;
+                      });
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const HomeScreen()));
+                    },
+                    text: 'Verify OTP'),
             const SizedBox(height: 40),
           ],
         ),

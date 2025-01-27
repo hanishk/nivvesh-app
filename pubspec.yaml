@@ -25,6 +25,7 @@ dependencies:
   dartz: ^0.10.1
   flutter_bloc: ^8.1.6
   flutter_native_splash: ^2.4.4
+  flutter_spinkit: ^5.2.1
 
 dev_dependencies:
   flutter_test:

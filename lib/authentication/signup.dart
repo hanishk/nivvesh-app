@@ -4,20 +4,29 @@ import 'package:nivvesh/authentication/otp_verify.dart';
 import 'package:nivvesh/shared/common_button.dart';
 import 'package:nivvesh/shared/common_scaffold.dart';
 
-class SignupPage extends StatelessWidget {
+class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
+
+  @override
+  State<SignupPage> createState() => _SignupPageState();
+}
+
+class _SignupPageState extends State<SignupPage> {
+  final _phoneController = TextEditingController();
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
     const SizedBox size40 = SizedBox(height: 40);
     const SizedBox size20 = SizedBox(height: 20);
     return CommonScaffold(
+      showIsLeadingIcon: false,
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 40),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 76),
+            const SizedBox(height: 74),
             const Text(
               'Create Your Account',
               style: TextStyle(
@@ -40,24 +49,44 @@ class SignupPage extends StatelessWidget {
               ),
             ),
             size40,
-            _buildInputField('Name', 'Enter your full name'),
+            _buildInputField(label: 'Name', hint: 'Enter your full name'),
             size20,
-            _buildInputField('Email Address', 'Enter your email'),
+            _buildInputField(label: 'Email Address', hint: 'Enter your email'),
             size20,
-            _buildInputField('Mobile Number', 'Enter your mobile number'),
+            _buildInputField(
+                label: 'Mobile Number',
+                hint: 'Enter your mobile number',
+                controller: _phoneController),
             size20,
-            _buildInputField('Password', 'Create a password'),
+            const PasswordField(
+              label: "Password",
+              hint: "Enter your password",
+            ),
             size40,
-            CommonButton(
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const OtpVerification()));
-                },
-                text: 'Sign Up Now'),
+            isLoading
+                ? const LoaderContainer()
+                : CommonButton(
+                    onTap: () async {
+                      setState(() {
+                        isLoading = true;
+                      });
+                      await Future.delayed(
+                        const Duration(milliseconds: 500),
+                      );
+                      setState(() {
+                        isLoading = false;
+                      });
+
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => OtpVerification(
+                                phoneNumber: _phoneController.text,
+                              )));
+                    },
+                    text: 'Sign Up Now'),
             size20,
             const Divider(color: Color(0xFFDCB56D)),
-            size20,
-            _buildGoogleButton(),
+            // size20,
+            // _buildGoogleButton(),
             size20,
             GestureDetector(
               onTap: () {
@@ -92,12 +121,13 @@ class SignupPage extends StatelessWidget {
     );
   }
 
-  Widget _buildInputField(String label, String hint) {
+  Widget _buildInputField(
+      {String? label, String? hint, TextEditingController? controller}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          label,
+          label ?? '',
           style: TextStyle(
             fontFamily: 'Roboto Flex',
             fontWeight: FontWeight.w500,
@@ -106,22 +136,30 @@ class SignupPage extends StatelessWidget {
             color: Color(0xFFAD783D).withOpacity(0.7),
           ),
         ),
-        SizedBox(height: 4),
+        const SizedBox(height: 4),
         Container(
           height: 45,
           decoration: BoxDecoration(
-            color: Color(0xFFD9D9D9),
+            color: const Color(0xFFD9D9D9),
             borderRadius: BorderRadius.circular(4),
             border: Border.all(
-              color: Color(0xFFDCB56D),
+              color: const Color(0xFFDCB56D),
               width: 0.5,
             ),
           ),
-          padding: EdgeInsets.symmetric(horizontal: 9, vertical: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 8),
           child: TextField(
+            controller: controller,
+            style: const TextStyle(
+              fontFamily: 'Roboto Flex',
+              fontWeight: FontWeight.w400,
+              fontSize: 14,
+              height: 1.71,
+              color: Colors.black,
+            ),
             decoration: InputDecoration(
               hintText: hint,
-              hintStyle: TextStyle(
+              hintStyle: const TextStyle(
                 fontFamily: 'Roboto Flex',
                 fontWeight: FontWeight.w400,
                 fontSize: 14,
@@ -129,6 +167,7 @@ class SignupPage extends StatelessWidget {
                 color: Color(0xFF858585),
               ),
               border: InputBorder.none,
+              focusedBorder: InputBorder.none,
             ),
           ),
         ),
@@ -152,8 +191,8 @@ class SignupPage extends StatelessWidget {
             width: 24,
             height: 24,
           ),
-          SizedBox(width: 10),
-          Text(
+          const SizedBox(width: 10),
+          const Text(
             'Continue with Google',
             style: TextStyle(
               fontFamily: 'Roboto Flex',
@@ -164,6 +203,94 @@ class SignupPage extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class PasswordField extends StatefulWidget {
+  final String label;
+  final String hint;
+
+  const PasswordField({super.key, required this.label, required this.hint});
+
+  @override
+  PasswordFieldState createState() => PasswordFieldState();
+}
+
+class PasswordFieldState extends State<PasswordField> {
+  bool _isPasswordVisible = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          widget.label,
+          style: TextStyle(
+            fontFamily: 'Roboto Flex',
+            fontWeight: FontWeight.w500,
+            fontSize: 16,
+            height: 1.5,
+            color: const Color(0xFFAD783D).withOpacity(0.7),
+          ),
+        ),
+        const SizedBox(height: 4),
+        Container(
+          height: 45,
+          decoration: BoxDecoration(
+            color: const Color(0xFFD9D9D9),
+            borderRadius: BorderRadius.circular(4),
+            border: Border.all(
+              color: const Color(0xFFDCB56D),
+              width: 0.5,
+            ),
+          ),
+          child: Row(
+            children: [
+              Expanded(
+                child: TextField(
+                  obscureText: !_isPasswordVisible,
+                  style: const TextStyle(
+                    fontFamily: 'Roboto Flex',
+                    fontWeight: FontWeight.w400,
+                    fontSize: 14,
+                    height: 1.71,
+                    color: Colors.black,
+                  ),
+                  decoration: InputDecoration(
+                    hintText: widget.hint,
+                    hintStyle: const TextStyle(
+                      fontFamily: 'Roboto Flex',
+                      fontWeight: FontWeight.w400,
+                      fontSize: 14,
+                      height: 1.71,
+                      color: Color(0xFF858585),
+                    ),
+                    border: InputBorder.none,
+                    focusedBorder: InputBorder.none,
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 9,
+                      vertical: 8,
+                    ),
+                  ),
+                ),
+              ),
+              IconButton(
+                icon: Icon(
+                  _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                  color: const Color(0xFF858585),
+                ),
+                onPressed: () {
+                  setState(() {
+                    _isPasswordVisible = !_isPasswordVisible;
+                  });
+                },
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
