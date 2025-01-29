@@ -62,9 +62,11 @@ class _HomePageState extends State<HomePage> {
     await Future.delayed(
       const Duration(milliseconds: 900),
     );
-    setState(() {
-      isLoading = false;
-    });
+    if (mounted) {
+      setState(() {
+        isLoading = false;
+      });
+    }
   }
 
   @override

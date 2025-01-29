@@ -53,13 +53,13 @@ class _HomeScreenState extends State<HomeScreen> {
               BottomNavigationBarItem(
                 backgroundColor: Colors.white,
                 icon: SvgPicture.asset(
-                  AppImages.homeIcon,
+                  AppImages.fdCalIcon,
                   color: _currentIndex == 1
                       ? AppColors.kYellowColor
                       : AppColors.navBarUnSelectedItemColour,
                   height: 22,
                 ),
-                label: 'Calculator',
+                label: 'FD Calculator',
               ),
               BottomNavigationBarItem(
                 backgroundColor: Colors.white,

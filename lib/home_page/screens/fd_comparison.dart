@@ -25,8 +25,16 @@ class _FDComparisonPageState extends State<FDComparisonPage> {
           child: Column(
             children: [
               const SizedBox(height: 24),
-              FdCardComparison(),
-              FdCardComparison(),
+              const FdCardComparison(
+                bankName: 'SBI',
+                interestRate: '6.75%',
+                amount: '₹10,000',
+              ),
+              const FdCardComparison(
+                bankName: 'HDFC',
+                interestRate: '7.00%',
+                amount: '₹25,000',
+              ),
               // FdCardComparison(),
               const SizedBox(height: 8),
               DetailedComparison(),

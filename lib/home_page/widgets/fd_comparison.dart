@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
 
 class FdCardComparison extends StatelessWidget {
-  const FdCardComparison({super.key});
+  final String bankName;
+  final String interestRate;
+  final String amount;
+  const FdCardComparison(
+      {super.key,
+      required this.bankName,
+      required this.interestRate,
+      required this.amount});
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Color(0xFF2B2B2B),
+      color: const Color(0xFF2B2B2B),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12.0),
       ),
@@ -20,15 +27,15 @@ class FdCardComparison extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "SBI",
-                  style: TextStyle(
+                  bankName,
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 18,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
                 Text(
-                  "6.75%",
+                  interestRate,
                   style: TextStyle(
                     color: Colors.yellow.shade700,
                     fontSize: 18,
@@ -37,7 +44,7 @@ class FdCardComparison extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -72,23 +79,23 @@ class FdCardComparison extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Text(
+                    const Text(
                       "12 months",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 14,
                       ),
                     ),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     Text(
-                      "₹10,000",
-                      style: TextStyle(
+                      amount,
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 14,
                       ),
                     ),
-                    SizedBox(height: 8),
-                    Text(
+                    const SizedBox(height: 8),
+                    const Text(
                       "Monthly",
                       style: TextStyle(
                         color: Colors.white,
