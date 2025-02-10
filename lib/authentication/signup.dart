@@ -49,19 +49,19 @@ class _SignupPageState extends State<SignupPage> {
               ),
             ),
             size40,
-            _buildInputField(label: 'Name', hint: 'Enter your full name'),
-            size20,
-            _buildInputField(label: 'Email Address', hint: 'Enter your email'),
-            size20,
+            // _buildInputField(label: 'Name', hint: 'Enter your full name'),
+            // size20,
+            // _buildInputField(label: 'Email Address', hint: 'Enter your email'),
+            // size20,
             _buildInputField(
                 label: 'Mobile Number',
                 hint: 'Enter your mobile number',
                 controller: _phoneController),
-            size20,
-            const PasswordField(
-              label: "Password",
-              hint: "Enter your password",
-            ),
+            // size20,
+            // const PasswordField(
+            //   label: "Password",
+            //   hint: "Enter your password",
+            // ),
             size40,
             isLoading
                 ? const LoaderContainer()
@@ -82,39 +82,39 @@ class _SignupPageState extends State<SignupPage> {
                                 phoneNumber: _phoneController.text,
                               )));
                     },
-                    text: 'Sign Up Now'),
+                    text: 'Continue'),
             size20,
-            const Divider(color: Color(0xFFDCB56D)),
+            // const Divider(color: Color(0xFFDCB56D)),
             // size20,
             // _buildGoogleButton(),
-            size20,
-            GestureDetector(
-              onTap: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => const LoginPage()));
-              },
-              child: Center(
-                child: RichText(
-                  text: const TextSpan(
-                    text: 'Already have an account? ',
-                    style: TextStyle(
-                      fontFamily: 'Roboto Flex',
-                      fontWeight: FontWeight.w500,
-                      fontSize: 14,
-                      color: Colors.white,
-                    ),
-                    children: [
-                      TextSpan(
-                        text: 'Login',
-                        style: TextStyle(
-                          color: Color(0xFFDCB56D),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
+            // size20,
+            // GestureDetector(
+            //   onTap: () {
+            //     Navigator.of(context).push(
+            //         MaterialPageRoute(builder: (context) => const LoginPage()));
+            //   },
+            //   child: Center(
+            //     child: RichText(
+            //       text: const TextSpan(
+            //         text: 'Already have an account? ',
+            //         style: TextStyle(
+            //           fontFamily: 'Roboto Flex',
+            //           fontWeight: FontWeight.w500,
+            //           fontSize: 14,
+            //           color: Colors.white,
+            //         ),
+            //         children: [
+            //           TextSpan(
+            //             text: 'Login',
+            //             style: TextStyle(
+            //               color: Color(0xFFDCB56D),
+            //             ),
+            //           ),
+            //         ],
+            //       ),
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),
@@ -150,6 +150,7 @@ class _SignupPageState extends State<SignupPage> {
           padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 8),
           child: TextField(
             controller: controller,
+            keyboardType: TextInputType.number,
             style: const TextStyle(
               fontFamily: 'Roboto Flex',
               fontWeight: FontWeight.w400,
